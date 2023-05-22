@@ -4,9 +4,11 @@ var sourceSheetLink = 'https://docs.google.com/spreadsheets/d/1otYwseHbr6DYcC544
 function getDataForARSFAHW() {
     importData();
     getSchedule('Schedules SV', 39);
-    getDistribution('Schedules SV', 42, 33);
+    getDistribution('Schedules SV', 116, 41, 33);
+    getDistribution('Schedules SV', 149, 74, 33);
     getSchedule('Schedules GT', 39);
-    getDistribution('Schedules GT', 42, 33);
+    getDistribution('Schedules GT', 116, 41, 33);
+    getDistribution('Schedules GT', 149, 74, 33);
 }
 
 function importData() {
@@ -36,13 +38,13 @@ function getSchedule(tabName, columnRange) {
 }
 
 
-function getDistribution(tabName, columnPosition, numberColumns) {
+function getDistribution(tabName, targetColumnPosition, columnPosition, numberColumns) {
     removeDistribution(tabName, columnPosition, numberColumns)
     var sourceSheet = SpreadsheetApp.openByUrl(sourceSheetLink);
     var sourceTab = sourceSheet.getSheetByName(tabName);
     var commandTab = sourceSheet.getSheetByName('Command tab');
     var rows = commandTab.getRange('C14').getValue();
-    var data = sourceTab.getRange(1, 117, rows, numberColumns).getDisplayValues();
+    var data = sourceTab.getRange(1, targetColumnPosition, rows, numberColumns).getDisplayValues();
     var thiSheet = SpreadsheetApp.getActiveSpreadsheet();
     var desSheet = thiSheet.getSheetByName(tabName);
     var rango = desSheet.getRange(1, columnPosition, rows, numberColumns);
