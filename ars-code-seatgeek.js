@@ -1,30 +1,25 @@
 //This is the ARS Engine [month] link
-var sourceSheetLink = 'https://docs.google.com/spreadsheets/d/1HfL94WjEv5rznJ2QRWCvoF8J9cr1ihoo3xI6mIzw5OA/edit#gid=647400929';
+var sourceSheetLink = 'https://docs.google.com/spreadsheets/d/12QFs0DONcuxz1b6DA-IFZgIzU-th-I8bFFUIJyc9Jzg/edit#gid=149758626';
 
 function getDataForARSFAHW() {
     importData();
-    getSchedule('Schedules SV', 38);
-    getDistribution('Schedules SV', 116, 41, 33);
-    getDistribution('Schedules SV', 149, 74, 33);
-    getDistribution('Schedules SV', 182, 107, 33);
-    getSchedule('Schedules GT', 38);
-    getDistribution('Schedules GT', 116, 41, 33);
-    getDistribution('Schedules GT', 149, 74, 33);
-    getDistribution('Schedules GT', 182, 107, 33);
+    getSchedule('Schedules', 38);
+    getDistribution('Schedules', 116, 41, 33);
+    getDistribution('Schedules', 149, 74, 33);
     getSchedule('Projection Training', 38);
     getTrainingAttendance();
 }
 
 function importData() {
-    removeDataAndSchedules('RD', 17);
+    removeDataAndSchedules('RD', 18);
     var sourceSheet = SpreadsheetApp.openByUrl(sourceSheetLink);
-    var sourceTab = sourceSheet.getSheetByName('CMR Hours');
+    var sourceTab = sourceSheet.getSheetByName('Talkdesk Hours');
     var commandTab = sourceSheet.getSheetByName('Command tab');
     var rows = commandTab.getRange('H6').getValue();
-    var data = sourceTab.getRange(1, 1, rows, 17).getDisplayValues();
+    var data = sourceTab.getRange(1, 1, rows, 18).getDisplayValues();
     var thiSheet = SpreadsheetApp.getActiveSpreadsheet()
     var desSheet = thiSheet.getSheetByName('RD')
-    var rango = desSheet.getRange(1, 1, rows, 17);
+    var rango = desSheet.getRange(1, 1, rows, 18);
     rango.setValues(data)
 }
 
